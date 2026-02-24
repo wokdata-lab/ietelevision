@@ -1,0 +1,27 @@
+name: Generar canal IPTV
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Ejecutar script
+        run: python3 generar.py
+
+      - name: Guardar playlist
+        run: |
+          git config --global user.name "iptv-bot"
+          git config --global user.email "bot@github.com"
+          git add .
+          git commit -m "update canal" || exit 0
+          git push

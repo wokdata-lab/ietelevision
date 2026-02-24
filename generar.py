@@ -10,13 +10,13 @@ base + "video3/video3.m3u8"
 
 random.shuffle(videos)
 
-contenido = "#EXTM3U\n"
+out = "#EXTM3U\n"
+out += "#EXT-X-VERSION:3\n"
 
-for i in range(50):
+for i in range(100):
     for v in videos:
-        contenido += "#EXTINF:-1,IETelevision\n"
-        contenido += v + "\n"
-        contenido += "#EXT-X-DISCONTINUITY\n"
+        out += "#EXT-X-STREAM-INF:BANDWIDTH=3000000\n"
+        out += v + "\n"
 
 with open("ietelevision.m3u8","w") as f:
-    f.write(contenido)
+    f.write(out)

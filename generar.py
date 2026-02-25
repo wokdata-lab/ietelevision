@@ -10,18 +10,13 @@ videos = [
 "video5.ts"
 ]
 
-# duplicamos la lista para que dure más
-videos = videos * 40
-
-# mezclar
+videos = videos * 30
 random.shuffle(videos)
 
-m3u = "#EXTM3U\n"
-m3u += "#EXT-X-VERSION:3\n"
-m3u += "#EXT-X-TARGETDURATION:3600\n\n"
+out = "#EXTM3U\n\n"
 
 for v in videos:
-    m3u += "#EXTINF:-1,\n"
-    m3u += base + v + "\n"
+    out += "#EXTINF:600,\n"
+    out += base + v + "\n\n"
 
-open("ietelevision.m3u8","w").write(m3u)
+open("ietelevision.m3u8","w").write(out)

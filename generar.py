@@ -10,12 +10,19 @@ videos = [
 "video5.ts"
 ]
 
+# mezclar
 random.shuffle(videos)
 
-out = "#EXTM3U\n"
+# repetir para que el canal dure mucho
+videos = videos * 50
+
+m3u = "#EXTM3U\n"
+m3u += "#EXT-X-VERSION:3\n"
+m3u += "#EXT-X-PLAYLIST-TYPE:EVENT\n"
+m3u += "#EXT-X-TARGETDURATION:600\n\n"
 
 for v in videos:
-    out += "#EXTINF:300,\n"
-    out += base + v + "\n"
+    m3u += "#EXTINF:600,\n"
+    m3u += base + v + "\n"
 
-open("ietelevision.m3u8","w").write(out)
+open("ietelevision.m3u8","w").write(m3u)

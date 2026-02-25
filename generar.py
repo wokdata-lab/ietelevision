@@ -1,28 +1,27 @@
 import random
-import os
 
-base_url = "https://ietelevision.wokdata.group/stream/"
-base_path = "stream"
+base = "https://ietelevision.wokdata.group/canal/"
 
-segments = []
+videos = [
+"video1.ts",
+"video2.ts",
+"video3.ts",
+"video4.ts",
+"video5.ts"
+]
 
-for root, dirs, files in os.walk(base_path):
-    for f in files:
-        if f.endswith(".ts"):
-            path = root.replace("\\", "/") + "/" + f
-            segments.append(path)
+# duplicamos la lista para que dure más
+videos = videos * 40
 
-random.shuffle(segments)
+# mezclar
+random.shuffle(videos)
 
-playlist = "#EXTM3U\n"
-playlist += "#EXT-X-VERSION:3\n"
-playlist += "#EXT-X-TARGETDURATION:7\n"
-playlist += "#EXT-X-MEDIA-SEQUENCE:0\n"
+m3u = "#EXTM3U\n"
+m3u += "#EXT-X-VERSION:3\n"
+m3u += "#EXT-X-TARGETDURATION:3600\n\n"
 
-for i in range(2000):
-    for seg in segments:
-        playlist += "#EXTINF:6.0,\n"
-        playlist += base_url + seg + "\n"
+for v in videos:
+    m3u += "#EXTINF:-1,\n"
+    m3u += base + v + "\n"
 
-with open("ietelevision.m3u8", "w") as f:
-    f.write(playlist)
+open("ietelevision.m3u8","w").write(m3u)

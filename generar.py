@@ -10,13 +10,12 @@ videos = [
 "video5.ts"
 ]
 
-videos = videos * 30
 random.shuffle(videos)
 
-out = "#EXTM3U\n\n"
+out = "#EXTM3U\n"
 
 for v in videos:
-    out += "#EXTINF:600,\n"
-    out += base + v + "\n\n"
+    out += "#EXTINF:300,\n"
+    out += base + v + "\n"
 
 open("ietelevision.m3u8","w").write(out)
